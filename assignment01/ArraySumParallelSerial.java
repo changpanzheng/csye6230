@@ -4,8 +4,7 @@ import java.util.Random;
 public class ArraySumParallelSerial {
     public static void main(String[] args) {
         // Initialize the array with some values
-        double[] arr = new double[5];
-        Arrays.fill(arr, 1.0);
+        double[] arr = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0 };
 
         // Multiply every value in the array with a random value between 0.1 and 0.9
         Random rand = new Random();
@@ -21,6 +20,7 @@ public class ArraySumParallelSerial {
         long serialTime = endSerial - startSerial;
 
         // Calculate the sum of the array in parallel
+        // Or we can utilize a separate method do parallel sum like comment
         long startParallel = System.currentTimeMillis();
         double sumParallel = Arrays.stream(arr).parallel().sum();
         long endParallel = System.currentTimeMillis();
@@ -30,6 +30,8 @@ public class ArraySumParallelSerial {
         System.out.println("Original array: " + Arrays.toString(arr));
         System.out.println("Sum in serial: " + sumSerial);
         System.out.println("Sum in parallel: " + sumParallel);
+        System.out.println("Time in serial: " + serialTime + "ms");
+        System.out.println("Time in parallel: " + parallelTime + "ms");
         System.out.println("Time difference: " + (parallelTime - serialTime) + " ms");
         System.out.println("Conclusion: Sum in " + (parallelTime <= serialTime ? "Parallel" : "Serial") + " cost less time.");
     }
